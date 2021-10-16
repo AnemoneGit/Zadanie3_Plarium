@@ -10,25 +10,23 @@ namespace Zadanie3B_Plarium
     {
 
        
-            public struct Coords
-            {
-            public Coords(double x, double y)
-            {
-                X = x;
-                Y = y;
-            }
-            public double X { get;  }
-            public double Y { get;  }
-            public void info() 
-            {
-                Console.WriteLine($"x: {X} and y: {Y}");
-
-
-            }
-        }
+        //    public struct Coords
+        //    {
+        //    public Coords(double x, double y)
+        //    {
+        //        X = x;
+        //        Y = y;
+        //    }
+        //    public double X { get;  }
+        //    public double Y { get;  }
+       
+        //}
 
         public class Ygolnik {
-           private List<Coords> cords = new List<Coords>();
+
+            private List<Tuple<double, double>> cords = new List<Tuple<double, double>>();
+            
+            //private List<Coords> cords = new List<Coords>();
             public Ygolnik()
             {
                 for(int i =0; i < 4; i++)
@@ -39,37 +37,31 @@ namespace Zadanie3B_Plarium
                 {
                     Console.WriteLine($"Ошибка ввода! Введите число");
                 }
-                    Console.WriteLine($"Введите координату х точки №{i+1}");
+                    Console.WriteLine($"Введите координату y точки №{i+1}");
                     while (!double.TryParse(Console.ReadLine(), out inputy)) //цыкл ввода, если пользователь вводит не число то выдаст предупреждение
                     {
                         Console.WriteLine($"Ошибка ввода! Введите число");
                     }
-                    cords.Add(new Coords(inputx, inputy));
+                    //cords.Add(new Coords(inputx, inputy));
+                    cords.Add(Tuple.Create(inputx, inputy));
                 }
                 
             }
 
-            public void GetInfo()
-            {
-                
-                cords[0].info();
-                cords[1].info();
-                cords[2].info();
-                cords[3].info();
-            }
+     
             public void GetParalelogram()
             {
                 //диагонали AC и BD четырёхугольника ABCD обозначим, как l и m, они являются векторами
-                 double l = Math.Sqrt((cords[2].X - cords[0].X) * (cords[2].X - cords[0].X) + (cords[2].Y - cords[0].Y) * (cords[2].Y - cords[0].Y));
-                 double m = Math.Sqrt((cords[3].X - cords[1].X) * (cords[3].X - cords[1].X) + (cords[3].Y - cords[1].Y) * (cords[3].Y - cords[1].Y));
-                if (((cords[2].X - cords[1].X) * (cords[3].Y - cords[0].Y) == (cords[3].X - cords[0].X) * (cords[2].Y - cords[1].Y)) || ((cords[1].X - cords[0].X) * (cords[2].Y - cords[3].Y) == (cords[2].X - cords[3].X) * (cords[1].Y - cords[0].Y)))
+                 double l = Math.Sqrt((cords[2].Item1 - cords[0].Item1) * (cords[2].Item1 - cords[0].Item1) + (cords[2].Item2 - cords[0].Item2) * (cords[2].Item2 - cords[0].Item2));
+                 double m = Math.Sqrt((cords[3].Item1 - cords[1].Item1) * (cords[3].Item1 - cords[1].Item1) + (cords[3].Item2 - cords[1].Item2) * (cords[3].Item2 - cords[1].Item2));
+                if (((cords[2].Item1 - cords[1].Item1) * (cords[3].Item2 - cords[0].Item2) == (cords[3].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[1].Item2)) || ((cords[1].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[3].Item2) == (cords[2].Item1 - cords[3].Item1) * (cords[1].Item2 - cords[0].Item2)))
                 {
-                    if (((cords[1].X - cords[0].X) * (cords[2].Y - cords[3].Y) == (cords[2].X - cords[3].X) * (cords[1].Y - cords[0].Y)) && ((cords[2].X - cords[1].X) * (cords[3].Y - cords[0].Y) == (cords[3].X - cords[0].X) * (cords[2].Y - cords[1].Y)))
+                    if (((cords[1].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[3].Item2) == (cords[2].Item1 - cords[3].Item1) * (cords[1].Item2 - cords[0].Item2)) && ((cords[2].Item1 - cords[1].Item1) * (cords[3].Item2 - cords[0].Item2) == (cords[3].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[1].Item2)))
                         if (l == m)
-                            Console.WriteLine($"фигура с координатами:A=({cords[0].X},{cords[0].Y}) B=({cords[1].X},{cords[1].Y}) C=({cords[2].X},{cords[2].Y}) D=({cords[3].X},{cords[3].Y}) является Прямоугольником");
+                            Console.WriteLine($"фигура с координатами:A=({cords[0].Item1},{cords[0].Item2}) B=({cords[1].Item1},{cords[1].Item2}) C=({cords[2].Item1},{cords[2].Item2}) D=({cords[3].Item1},{cords[3].Item2}) является Прямоугольником");
                         else
                         {
-                            Console.WriteLine($"фигура с координатами:A=({cords[0].X},{cords[0].Y}) B=({cords[1].X},{cords[1].Y}) C=({cords[2].X},{cords[2].Y}) D=({cords[3].X},{cords[3].Y}) является Параллелограммом");
+                            Console.WriteLine($"фигура с координатами:A=({cords[0].Item1},{cords[0].Item2}) B=({cords[1].Item1},{cords[1].Item2}) C=({cords[2].Item1},{cords[2].Item2}) D=({cords[3].Item1},{cords[3].Item2}) является Параллелограммом");
                         }
                
                 }
@@ -78,13 +70,13 @@ namespace Zadanie3B_Plarium
             public void GetTrapesion()
             {
 
-                if (((cords[2].X - cords[1].X) * (cords[3].Y - cords[0].Y) == (cords[3].X - cords[0].X) * (cords[2].Y - cords[1].Y)) || ((cords[1].X - cords[0].X) * (cords[2].Y - cords[3].Y) == (cords[2].X - cords[3].X) * (cords[1].Y - cords[0].Y)))
+                if (((cords[2].Item1 - cords[1].Item1) * (cords[3].Item2 - cords[0].Item2) == (cords[3].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[1].Item2)) || ((cords[1].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[3].Item2) == (cords[2].Item1 - cords[3].Item1) * (cords[1].Item2 - cords[0].Item2)))
                 {
-                    if (((cords[1].X - cords[0].X) * (cords[2].Y - cords[3].Y) != (cords[2].X - cords[3].X) * (cords[1].Y - cords[0].Y)) && ((cords[2].X - cords[1].X) * (cords[3].Y - cords[0].Y) == (cords[3].X - cords[0].X) * (cords[2].Y - cords[1].Y)))
+                    if (((cords[1].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[3].Item2) != (cords[2].Item1 - cords[3].Item1) * (cords[1].Item2 - cords[0].Item2)) && ((cords[2].Item1 - cords[1].Item1) * (cords[3].Item2 - cords[0].Item2) == (cords[3].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[1].Item2)))
                        
                    
                     {
-                        Console.WriteLine($"фигура с координатами:A=({cords[0].X},{cords[0].Y}) B=({cords[1].X},{cords[1].Y}) C=({cords[2].X},{cords[2].Y}) D=({cords[3].X},{cords[3].Y}) является Трапецией");
+                        Console.WriteLine($"фигура с координатами:A=({cords[0].Item1},{cords[0].Item2}) B=({cords[1].Item1},{cords[1].Item2}) C=({cords[2].Item1},{cords[2].Item2}) D=({cords[3].Item1},{cords[3].Item2}) является Трапецией");
                     }
                 }
             }
@@ -95,6 +87,7 @@ namespace Zadanie3B_Plarium
         static void Main(string[] args)
         {
             Ygolnik u = new Ygolnik();
+            u.GetParalelogram();
             u.GetParalelogram();
             System.Console.ReadKey(true);
         }

@@ -64,5 +64,10 @@ namespace Zadanie3C_Plarium
                 }
              
         }
+
+        public override string ToString()
+        {
+            return $"Регион:\n{reg}\nДата:\n{date}\nТемпература: {temp+ "°C"}\nОсодки: {osad}\n";
+        }
     }
 }

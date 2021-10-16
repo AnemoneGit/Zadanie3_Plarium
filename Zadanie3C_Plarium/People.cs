@@ -8,12 +8,18 @@ namespace Zadanie3C_Plarium
 {
     class People
     {
-        public string Nazvanie;
+        private string Nazvanie;
         public string Langue;
         public People(string Name, string langue)
         {
             Nazvanie=Name;
             Langue = langue;
         }
+        public People(People other)
+        {
+            Nazvanie = other.Nazvanie;
+            Langue = other.Langue;
+        }
+
     }
 }

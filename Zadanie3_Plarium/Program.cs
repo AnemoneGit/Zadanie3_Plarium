@@ -9,6 +9,7 @@ namespace Zadanie3_Plarium
    
     class Program
     {
+
         static void taskA1(string s)
         {
             Console.Write("Введите слово которое надо выделить: ");
@@ -48,15 +49,44 @@ namespace Zadanie3_Plarium
 
         static void taskA3(string s)
         {
+            
+            string text;int j = 0;
+            bool bol = true;
+            string[] splite = s.Split(new char[] { ' ', ',', '.', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach(string str in splite)
+            {
+                
+                for (int i=0; i < str.Length-4; i++)
+                {
+                   text = str.Substring(i,i+3);
+                    bol = false;
+                    for(int t = 0; t < splite.Length; t++)
+                    {
+                        if (t != j)
+                        {
+                            if (splite[t].Contains(text))
+                            {
+                                Console.Write(splite[t].Insert(splite[t].IndexOf(text),"-").Insert(splite[t].IndexOf(text)+4, "-")+" ");
+                                bol = true;
+                            }
+                        }
+                    }
+                    if(bol) Console.Write(splite[j].Insert(splite[j].IndexOf(text), "-").Insert(splite[j].IndexOf(text) + 4, "-") + "\n");
+                }
+                j++;
+            }
 
         }
-   
+
+       
+
         static void Main(string[] args)
         {  
             Console.Write("Введите текст строки: ");
             string text = Console.ReadLine();
-            taskA1(text);
-            taskA2(text);
+           // taskA1(text);
+           // taskA2(text);
+            //taskA3(text);
              System.Console.ReadKey(true);
         }
     }
