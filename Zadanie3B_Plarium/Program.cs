@@ -8,26 +8,17 @@ namespace Zadanie3B_Plarium
 {
     class Program
     {
+        /*3. Четырехугольники. В сущностях (типах) хранятся координаты вершин выпуклых четырехугольников на плоскости.
+Вывести координаты вершин параллелограммов.
+Вывести координаты вершин трапеций.
+*/
 
-       
-        //    public struct Coords
-        //    {
-        //    public Coords(double x, double y)
-        //    {
-        //        X = x;
-        //        Y = y;
-        //    }
-        //    public double X { get;  }
-        //    public double Y { get;  }
-       
-        //}
+        public class Ygolnik //класс в котором хранятся координаты и методы для фигуры
+        {
 
-        public class Ygolnik {
+            private List<Tuple<double, double>> cords = new List<Tuple<double, double>>();//лист кортежей в котором будут храниться координаты фигуры
 
-            private List<Tuple<double, double>> cords = new List<Tuple<double, double>>();
-            
-            //private List<Coords> cords = new List<Coords>();
-            public Ygolnik()
+            public Ygolnik()//конструктор в котором пользователь введет координаты
             {
                 for(int i =0; i < 4; i++)
                 {
@@ -49,7 +40,7 @@ namespace Zadanie3B_Plarium
             }
 
      
-            public void GetParalelogram()
+            public void GetParalelogram()//метод для определения является ли четырехугольник паралелограммом
             {
                 //диагонали AC и BD четырёхугольника ABCD обозначим, как l и m, они являются векторами
                  double l = Math.Sqrt((cords[2].Item1 - cords[0].Item1) * (cords[2].Item1 - cords[0].Item1) + (cords[2].Item2 - cords[0].Item2) * (cords[2].Item2 - cords[0].Item2));
@@ -67,7 +58,7 @@ namespace Zadanie3B_Plarium
                 }
            
             }
-            public void GetTrapesion()
+            public void GetTrapesion()//метод для определения является ли четырехугольник трапецией
             {
 
                 if (((cords[2].Item1 - cords[1].Item1) * (cords[3].Item2 - cords[0].Item2) == (cords[3].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[1].Item2)) || ((cords[1].Item1 - cords[0].Item1) * (cords[2].Item2 - cords[3].Item2) == (cords[2].Item1 - cords[3].Item1) * (cords[1].Item2 - cords[0].Item2)))
@@ -86,9 +77,9 @@ namespace Zadanie3B_Plarium
 
         static void Main(string[] args)
         {
-            Ygolnik u = new Ygolnik();
-            u.GetParalelogram();
-            u.GetParalelogram();
+            Ygolnik u = new Ygolnik();//создаем фигуру
+            u.GetParalelogram();//проверяем на паралелограмм
+            u.GetParalelogram();//проверяем на трапецию
             System.Console.ReadKey(true);
         }
     }

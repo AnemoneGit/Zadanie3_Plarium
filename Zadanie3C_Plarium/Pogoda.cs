@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Zadanie3C_Plarium
 {
-    class Pogoda
+    class Pogoda//класс погоды(основной класс)
     {
-       public Region reg;
-       public DateTime date;
-        public decimal temp;
-        public string osad;
+       public Region reg;//регион по которому будет информация о погоде
+       public DateTime date;//дата
+        public decimal temp;//температура
+        public string osad;//осадки
 
         public Pogoda(Region region, DateTime Date, decimal T, string Osad)
         {
@@ -21,7 +21,7 @@ namespace Zadanie3C_Plarium
         osad=Osad;
         }
 
-        public void GetPogoda(List<Pogoda> vezers, Region region)
+        public void GetPogoda(List<Pogoda> vezers, Region region)//Вывести сведения о погоде в заданном регионе
         {
             foreach (Pogoda pogoda in vezers)
                 if (pogoda.reg.Nazva == region.Nazva)
@@ -31,14 +31,14 @@ namespace Zadanie3C_Plarium
             
         }
 
-        public void GetData(List<Pogoda> vezers, Region region, string osadki, decimal zTemp)
+        public void GetData(List<Pogoda> vezers, Region region, string osadki, decimal zTemp)//Вывести даты, когда в заданном регионе шел снег и температура была ниже заданной отрицательной.
         {
             foreach (Pogoda pogoda in vezers)
                 if (pogoda.reg.Nazva==region.Nazva && pogoda.osad ==osadki && zTemp> pogoda.temp)
                 Console.WriteLine($" {pogoda.date} числа в регионе {pogoda.reg.Nazva}, температура {pogoda.temp + "°C"} была меньше заданной {zTemp + "°C"}, и были заданные осадки:{pogoda.osad}");
         }
 
-        public void GetPogoda(List<Pogoda> vezers, string Lang)
+        public void GetPogoda(List<Pogoda> vezers, string Lang)//Вывести информацию о погоде за прошедшую неделю в регионах, жители которых общаются на заданном языке
         {
             
             foreach (Pogoda pogoda in vezers)
@@ -50,7 +50,7 @@ namespace Zadanie3C_Plarium
             }
         }
 
-        public void GetTemp(List<Pogoda> vezers, int Zplochad, List<Region> regions)
+        public void GetTemp(List<Pogoda> vezers, int Zplochad, List<Region> regions)//Вывести среднюю температуру за прошедшую неделю в регионах с площадью больше заданной
         {
             decimal srTemp=0;
             foreach (Region region in regions) {
@@ -65,7 +65,7 @@ namespace Zadanie3C_Plarium
              
         }
 
-        public override string ToString()
+        public override string ToString()//переопределенный метод ToString
         {
             return $"Регион:\n{reg}\nДата:\n{date}\nТемпература: {temp+ "°C"}\nОсодки: {osad}\n";
         }

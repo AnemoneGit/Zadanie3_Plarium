@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zadanie3C_Plarium
 {
-    class Region
+    class Region // класс регион
     {
-        public string Nazva;
-        public int Plochad;
-        public People people;
+        public string Nazva; //название региона
+        public int Plochad; // площадь региона
+        public People people; // люди которые живут в регионе
 
         public Region(string Name, int plochad, People person)
         {
